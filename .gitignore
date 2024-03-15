@@ -28,6 +28,7 @@ target/
 
 #Maven temporary files
 mvnw*
+.mvnw*
 
 #Intellij files
 .idea/

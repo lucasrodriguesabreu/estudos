@@ -3,13 +3,17 @@ package com.lucas.estudos.controllers;
 import com.lucas.estudos.domains.Produto;
 import com.lucas.estudos.domains.ProdutoDto;
 import com.lucas.estudos.services.ProdutoService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/produtos")
@@ -33,6 +37,14 @@ public class ProdutoController {
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @GetMapping
+    public ResponseEntity<List<Produto>> findProdutos(){
+        List<Produto> produto = produtoService.findProdutos();
+        return new ResponseEntity<>(produto, HttpStatus.OK);
+    }
+
+
 
     private ProdutoDto mapToDTO(Produto produto) {
         ProdutoDto dto = new ProdutoDto();
